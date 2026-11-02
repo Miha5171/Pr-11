@@ -13,49 +13,49 @@ namespace Пр11
     {
         static void Main(string[] args)
         {
-            double h, r;
-            h = 0;
-            while (h < 1)
+            double repetitionCycle, loopForContinuationOrTermination;
+            repetitionCycle = 0;
+            while (repetitionCycle < 1)
             {
                 Console.Clear(); //Очистка 
                 Console.Title = "Практическая работа №11";
                 Console.WriteLine("Здравствуйте");
                 try
                 {
-                    string keyword = "password:";
+                    string keyword = "password:";//слово каторое меняет 5 символов после себя
                     string text;
                     int simvol = 5;
                     string zamena = "*****";
                     Console.Write("Введите строку: ");
-                    text= Console.ReadLine();
-                    StringBuilder result = new StringBuilder();
+                    text= Console.ReadLine();//Ввод текста
+                    StringBuilder result = new StringBuilder();//Ввод переменной для результата
                     int currentIndex = 0;
                     int foundIndex = text.IndexOf(keyword, currentIndex);
-                    while (foundIndex != -1)
+                    while (foundIndex != -1)//нахождение password:
                     {
-                        result.Append(text.Substring(currentIndex, foundIndex - currentIndex));
+                        result.Append(text.Substring(currentIndex, foundIndex - currentIndex));//
                         result.Append(keyword);
-                        int startReplace = foundIndex + keyword.Length;
-                        if (startReplace + simvol <= text.Length)
+                        int startReplace = foundIndex + keyword.Length;//
+                        if (startReplace + simvol <= text.Length)//
                         {
                             result.Append(zamena);
                         }
-                        else
+                        else//
                         {
-                            int remaining = text.Length - startReplace;
-                            result.Append(new string('*', remaining));
+                            int remaining = text.Length - startReplace;//
+                            result.Append(new string('*', remaining));//
                         }
-                        int charsToSkip = keyword.Length + simvol;
-                        currentIndex = foundIndex + charsToSkip;
-                        if (currentIndex >= text.Length) break;
-                        foundIndex = text.IndexOf(keyword, currentIndex);
+                        int charsToSkip = keyword.Length + simvol;//
+                        currentIndex = foundIndex + charsToSkip;//
+                        if (currentIndex >= text.Length) break;//
+                        foundIndex = text.IndexOf(keyword, currentIndex);//
                     }
-                    if (currentIndex < text.Length)
+                    if (currentIndex < text.Length)//
                     {
                         result.Append(text.Substring(currentIndex));
                     }
-                    Console.WriteLine("преобразованная строка: ");
-                    Console.Write(result.ToString());
+                    Console.WriteLine("преобразованная строка: ");//Вывод преобразованой строки
+                    Console.WriteLine(result.ToString());
                 }
                 catch (FormatException fEx)
                 {
@@ -75,26 +75,45 @@ namespace Пр11
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Хотите запустить снова?");
                 Console.WriteLine("Если да то введите 0, если нет введите 1 ");
-                int g = -1;
-                while (g < 0)
+                int check = -1;
+                while (check < 0)
                 {
-                    r = Convert.ToDouble(Console.ReadLine());
-                    if (r == 0)
+                    try
                     {
-                        h = 0;
-                        g = 1;
+                        loopForContinuationOrTermination = Convert.ToDouble(Console.ReadLine());
+                        if (loopForContinuationOrTermination == 0)
+                        {
+                            repetitionCycle = 0;
+                            check = 1;
+                        }
+                        else if (loopForContinuationOrTermination == 1)
+                        {
+                            repetitionCycle = 1;
+                            check = 1;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Ошибка: нужно ввести 0 или 1.");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                     }
-                    else if (r == 1)
-                    {
-                        h = 1;
-                        g = 1;
-                    }
-                    else
+                    catch (FormatException fEx)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ошибка: нужно ввести 0 или 1. Программа завершается.");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($"Ошибка: {fEx.Message} ");
                     }
+                    catch (OverflowException oEx)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Ошибка переполнения: {oEx.Message} ");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Что-то пошло не так. ошибка : " + e.Message);
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadKey();// Задержка
