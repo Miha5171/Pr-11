@@ -22,40 +22,54 @@ namespace Пр11
                 Console.WriteLine("Здравствуйте");
                 try
                 {
-                    string keyword = "password:";//слово каторое меняет 5 символов после себя
-                    string text;
-                    int simvol = 5;
-                    string zamena = "*****";
-                    Console.Write("Введите строку: ");
-                    text= Console.ReadLine();//Ввод текста
-                    StringBuilder result = new StringBuilder();//Ввод переменной для результата
-                    int currentIndex = 0;
-                    int foundIndex = text.IndexOf(keyword, currentIndex);
-                    while (foundIndex != -1)//нахождение password:
+                    string line = "*****";
+                    string key = "password:";
+                    char[] line1 = line.ToCharArray();//перевод строки в массив 
+                    char[] key1 = key.ToCharArray();
+                    int repetitionOnTheInput = 0;
+                    Console.WriteLine("Если вы хотитн заменить 5 символов то введите (password:)");
+                    Console.WriteLine("Введите текст: ");
+                    while (repetitionOnTheInput == 0)
                     {
-                        result.Append(text.Substring(currentIndex, foundIndex - currentIndex));//
-                        result.Append(keyword);
-                        int startReplace = foundIndex + keyword.Length;//
-                        if (startReplace + simvol <= text.Length)//
+                        string text = Console.ReadLine();
+                        if (String.IsNullOrEmpty(text))//проверка на пустоту в строке
                         {
-                            result.Append(zamena);
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Ошибка: Строка пустая, введите строку!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            repetitionOnTheInput = 0;
                         }
-                        else//
+                        else
                         {
-                            int remaining = text.Length - startReplace;//
-                            result.Append(new string('*', remaining));//
+                            int theLastCharacter = text.Length;//размер массива
+                            repetitionOnTheInput = 1;
+                            char[] text1 = text.ToCharArray();
+                            int index = 0;
+                            int currentIndex = 0;
+
+                            if (index >= 0)
+                            {
+                                while (index >= 0)//повторение если несколько password
+                                {
+                                    index = text.IndexOf(key, currentIndex);
+                                    int j = 0;
+                                    int substitutionLimit = index + 14;
+                                    for (int i = index + 9; i < substitutionLimit; i++)//замена на *
+                                    {
+                                        if (theLastCharacter > i)
+                                        {
+                                            text1[i] = line1[j];
+                                            j = j++;
+                                        }
+                                    }
+                                    text = new String(text1);
+                                    currentIndex = index + 9;
+                                }
+                            }
+                            Console.WriteLine($"Переобразованный текст:{text}");
                         }
-                        int charsToSkip = keyword.Length + simvol;//
-                        currentIndex = foundIndex + charsToSkip;//
-                        if (currentIndex >= text.Length) break;//
-                        foundIndex = text.IndexOf(keyword, currentIndex);//
+
                     }
-                    if (currentIndex < text.Length)//
-                    {
-                        result.Append(text.Substring(currentIndex));
-                    }
-                    Console.WriteLine("преобразованная строка: ");//Вывод преобразованой строки
-                    Console.WriteLine(result.ToString());
                 }
                 catch (FormatException fEx)
                 {

@@ -1,0 +1,7 @@
+C:\Users\razum\source\repos\Пр 11\Пр 11\bin\Debug\Пр 11.exe.config
+C:\Users\razum\source\repos\Пр 11\Пр 11\bin\Debug\Пр 11.exe
+C:\Users\razum\source\repos\Пр 11\Пр 11\bin\Debug\Пр 11.pdb
+C:\Users\razum\source\repos\Пр 11\Пр 11\obj\Debug\Пр 11.csproj.AssemblyReference.cache
+C:\Users\razum\source\repos\Пр 11\Пр 11\obj\Debug\Пр 11.csproj.CoreCompileInputs.cache
+C:\Users\razum\source\repos\Пр 11\Пр 11\obj\Debug\Пр 11.exe
+C:\Users\razum\source\repos\Пр 11\Пр 11\obj\Debug\Пр 11.pdb
