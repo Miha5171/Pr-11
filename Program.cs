@@ -27,7 +27,7 @@ namespace Пр11
                     char[] line1 = line.ToCharArray();//перевод строки в массив 
                     char[] key1 = key.ToCharArray();
                     int repetitionOnTheInput = 0;
-                    Console.WriteLine("Если вы хотитн заменить 5 символов то введите (password:)");
+                    Console.WriteLine("Если вы хотите скрыть 5 символов то введите (password:)");
                     Console.WriteLine("Введите текст: ");
                     while (repetitionOnTheInput == 0)
                     {
